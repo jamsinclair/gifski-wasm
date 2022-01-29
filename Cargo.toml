@@ -1,0 +1,24 @@
+[package]
+name = "gifski-wasm"
+version = "0.1.0"
+edition = "2021"
+
+[package.metadata.wasm-pack.profile.release]
+wasm-opt = ["-O", "--no-validation"]
+
+[lib]
+crate-type = ["cdylib"]
+
+[dependencies]
+gifski-lite = "1.0.0"
+imgref = "1.9.1"
+rgb = "0.8.31"
+wasm-bindgen = "0.2.79"
+console_error_panic_hook = { version = "0.1.7", optional = true }
+
+[features]
+debug = ["console_error_panic_hook"]
+
+[profile.release]
+lto = true
+opt-level = "s"

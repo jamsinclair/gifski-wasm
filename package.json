@@ -1,0 +1,24 @@
+{
+  "name": "gifski-wasm",
+  "version": "1.0.0",
+  "description": "Encode GIF images to the max possible quality with JS!",
+  "main": "dist/encode.js",
+  "files": [
+    "dist/encode.js",
+    "dist/encode.d.ts",
+    "dist/encode.d.ts.map",
+    "pkg/gifski_wasm_bg.wasm",
+    "pkg/gifski_wasm_bg.wasm.d.ts",
+    "pkg/gifski_wasm.d.ts",
+    "pkg/gifski_wasm.js"
+  ],
+  "repository": "https://github.com/jamsinclair/gifski-wasm",
+  "author": "Jamie Sinclair <jamsinclairnz@gmail.com>",
+  "license": "AGPL-3.0-or-later",
+  "scripts": {
+    "build": "tsc"
+  },
+  "devDependencies": {
+    "typescript": "^4.5.5"
+  }
+}
