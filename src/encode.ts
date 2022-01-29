@@ -1,5 +1,5 @@
-import type { InitInput } from './pkg/gifski_wasm.js';
-import initGifskiModule, { encode as gifskiEncode }  from './pkg/gifski_wasm.js';
+import type { InitInput } from '../pkg/gifski_wasm.js';
+import initGifskiModule, { encode as gifskiEncode }  from '../pkg/gifski_wasm.js';
 
 let gifskiModule: ReturnType<typeof initGifskiModule>;
 

@@ -9,9 +9,8 @@
     "moduleResolution": "Node",
     "composite": true,
     "declarationMap": true,
-    "baseUrl": "./",
-    "rootDir": "./",
-    "outDir": "dist",
+    "rootDir": "./src",
+    "outDir": "./dist",
     "allowSyntheticDefaultImports": true
   }
 }
