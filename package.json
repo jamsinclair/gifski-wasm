@@ -17,6 +17,7 @@
   "author": "Jamie Sinclair <jamsinclairnz@gmail.com>",
   "license": "AGPL-3.0-or-later",
   "scripts": {
+    "clean": "rm -r dist pkg",
     "build": "tsc"
   },
   "devDependencies": {
