@@ -222,9 +222,9 @@ dependencies = [
 
 [[package]]
 name = "gifski-lite"
-version = "1.0.0"
+version = "1.0.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "f9c689952bb6b6594cdcfe0339173f836d436dab72a6c91ad4f37b13a11979ee"
+checksum = "e08b6bd049f8eef0cc0698a71519160b8db709c53e5cb1b24c3a8491fffc109d"
 dependencies = [
  "crossbeam-channel",
  "gif",

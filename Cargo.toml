@@ -10,7 +10,7 @@ wasm-opt = ["-O", "--no-validation"]
 crate-type = ["cdylib"]
 
 [dependencies]
-gifski-lite = "1.0.0"
+gifski-lite = "1.0.1"
 imgref = "1.9.1"
 rgb = "0.8.31"
 wasm-bindgen = "0.2.79"
