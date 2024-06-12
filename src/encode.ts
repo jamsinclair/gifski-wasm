@@ -13,7 +13,7 @@ export async function init (moduleOrPath?: InitInput){
 
 function framesToBuffer (frames: Array<Uint8Array | ImageData>): Uint8Array {
     return frames.reduce<Uint8Array>((acc, frame) => {
-        let _frame = frame instanceof ImageData || "data" in frame ? frame.data : frame;
+        let _frame = (frame instanceof ImageData || "data" in frame ? frame.data : frame) as Uint8Array;
         if (acc.length === 0) {
             return new Uint8Array([..._frame]);
         }

@@ -20,6 +20,9 @@
     "clean": "rm -r dist pkg",
     "build": "tsc"
   },
+  "dependencies": {
+    "wasm-feature-detect": "1.6.1"
+  },
   "devDependencies": {
     "typescript": "^4.5.5"
   }

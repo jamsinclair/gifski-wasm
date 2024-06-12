@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "target": "ES2019",
+    "target": "ES2022",
     "downlevelIteration": true,
     "module": "esnext",
     "jsx": "react",
@@ -11,6 +11,8 @@
     "declarationMap": true,
     "rootDir": "./src",
     "outDir": "./dist",
-    "allowSyntheticDefaultImports": true
+    "allowSyntheticDefaultImports": true,
+    "lib": ["esnext", "dom", "webworker"],
+    "skipLibCheck": true
   }
 }
