@@ -1,0 +1,7 @@
+name = "gif-maker"
+compatibility_date = "2021-11-06"
+
+[wasm_modules]
+# @Note we need to manually include the wasm modules used for Cloudflare workers
+# the module will be injected as global vars into the worker
+GIFSKI_WASM = "node_modules/gifski-wasm/pkg/gifski_wasm_bg.wasm"

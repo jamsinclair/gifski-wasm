@@ -1,0 +1,14 @@
+{
+  "name": "cloudflare-worker-esm-gif-maker",
+  "version": "1.0.0",
+  "main": "worker.js",
+  "scripts": {
+    "start": "wrangler dev src/index.js"
+  },
+  "dependencies": {
+    "gifski-wasm": "file:../../"
+  },
+  "devDependencies": {
+    "wrangler": "^3.1.0"
+  }
+}
