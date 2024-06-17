@@ -72,7 +72,7 @@ createGifButton.addEventListener('click', async (event) => {
         frames.push(data);
     }
 
-    const worker = new Worker('gif.worker.js', { type: 'module' });
+    const worker = new Worker(new URL('./gif.worker.js', import.meta.url), { type: 'module' });
 
     let quality = 50;
     if (Number.isInteger(document.querySelector('#quality')?.value)) {
