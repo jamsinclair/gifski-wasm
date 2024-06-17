@@ -3,15 +3,26 @@
   "version": "1.0.1",
   "description": "Encode GIF images to the max possible quality with JS!",
   "keywords": ["gif", "image", "encoder", "wasm", "webassembly", "optimise"],
-  "main": "dist/encode.js",
+  "exports": {
+    ".": "./dist/encode.js",
+    "./multi-thread": "./dist/encode-multi-thread.js" 
+  },
   "files": [
     "dist/encode.js",
     "dist/encode.d.ts",
-    "dist/encode.d.ts.map",
+    "dist/encode-multi-thread.js",
+    "dist/encode-multi-thread.d.ts",
     "pkg/gifski_wasm_bg.wasm",
     "pkg/gifski_wasm_bg.wasm.d.ts",
     "pkg/gifski_wasm.d.ts",
-    "pkg/gifski_wasm.js"
+    "pkg/gifski_wasm.js",
+    "pkg-parallel/gifski_wasm_bg.wasm",
+    "pkg-parallel/gifski_wasm_bg.wasm.d.ts",
+    "pkg-parallel/gifski_wasm.d.ts",
+    "pkg-parallel/gifski_wasm.js",
+    "pkg-parallel/snippets",
+    "pkg-parallel/package.json"
+
   ],
   "repository": "https://github.com/jamsinclair/gifski-wasm",
   "author": "Jamie Sinclair <jamsinclairnz@gmail.com>",
@@ -25,5 +36,6 @@
   },
   "devDependencies": {
     "typescript": "^4.5.5"
-  }
+  },
+  "type": "module"
 }
