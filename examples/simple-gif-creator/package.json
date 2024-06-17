@@ -1,0 +1,12 @@
+{
+  "name": "simple-gif-creator",
+  "scripts": {
+    "dev": "vite dev",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "gifski-wasm": "file:../../",
+    "vite": "^5.3.1"
+  }
+}
