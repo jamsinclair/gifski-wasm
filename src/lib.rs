@@ -1,3 +1,6 @@
+#[cfg(feature = "parallel")]
+pub use wasm_bindgen_rayon::init_thread_pool;
+
 #[cfg(feature = "debug")]
 extern crate console_error_panic_hook;
 use wasm_bindgen::prelude::*;
@@ -18,7 +21,7 @@ pub fn encode(frames: &[u8], num_of_frames: usize, width: u32, height: u32, fps:
     let settings = Settings {
         width: resize_width,
         height: resize_height,
-        quality: quality.unwrap_or(100),
+        quality: quality.unwrap_or(80),
         fast: false, // TODO: Do we want to expose this? Does it have much of an impact?
         repeat: if _repeat >= 0 { Repeat::Finite(_repeat as u16) } else { Repeat::Infinite },
     };
@@ -32,7 +35,7 @@ pub fn encode(frames: &[u8], num_of_frames: usize, width: u32, height: u32, fps:
         panic!("Expected total of frames do not match the number of frames provided. Are all frames the same height and width?");
     }
 
-    let (mut collector, writer) = gifski_lite::new(settings).unwrap_throw();
+    let (collector, writer) = gifski_lite::new(settings).unwrap_throw();
 
     for (index, frame) in frames.chunks_exact(frame_size as usize).enumerate() {
         let image = ImgVec::new(frame.as_rgba().into(), width as usize, height as usize);
@@ -41,7 +44,7 @@ pub fn encode(frames: &[u8], num_of_frames: usize, width: u32, height: u32, fps:
 
     drop(collector);
 
-    match writer.write(&mut buffer) {
+    match writer.write(&mut buffer, &mut progress::NoProgress {}) {
         Ok(_) => (),
         Err(error) => panic!("Problem writing the gif: {:?}", error),
     }

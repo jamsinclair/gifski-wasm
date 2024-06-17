@@ -12,8 +12,8 @@ export async function init (moduleOrPath?: InitInput){
 }
 
 function framesToBuffer (frames: Array<Uint8Array | ImageData>): Uint8Array {
-    return frames.reduce<Uint8Array>((acc, frame) => {
-        let _frame = frame instanceof ImageData || "data" in frame ? frame.data : frame;
+    return frames.reduce<Uint8Array>((acc, frame: Uint8Array | ImageData) => {
+        let _frame = frame instanceof ImageData || "data" in frame ? frame.data as Uint8ClampedArray : frame;
         if (acc.length === 0) {
             return new Uint8Array([..._frame]);
         }
@@ -22,14 +22,14 @@ function framesToBuffer (frames: Array<Uint8Array | ImageData>): Uint8Array {
 }
 
 type EncodeOptions = {
-  frames: Array<Uint8Array | ImageData>,
-  width: number,
-  height: number,
-  fps: number,
-  quality?: number,
-  repeat?: number,
-  resizeWidth?: number,
-  resizeHeight?: number,
+  frames: Array<Uint8Array | ImageData>;
+  width: number;
+  height: number;
+  fps: number;
+  quality?: number;
+  repeat?: number;
+  resizeWidth?: number;
+  resizeHeight?: number;
 }
 
 export default async function encode({

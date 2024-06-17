@@ -10,14 +10,20 @@ wasm-opt = ["-O", "--no-validation"]
 crate-type = ["cdylib"]
 
 [dependencies]
-gifski-lite = "1.0.1"
+gifski-lite = { git = "https://github.com/jamsinclair/gifski-lite.git", branch = "main" }
 imgref = "1.9.1"
 rgb = "0.8.31"
-wasm-bindgen = "0.2.79"
+wasm-bindgen = "0.2.92"
+wasm-bindgen-rayon = { version = "1.2.1", optional = true }
 console_error_panic_hook = { version = "0.1.7", optional = true }
 
 [features]
 debug = ["console_error_panic_hook"]
+parallel = ["gifski-lite/parallel", "wasm-bindgen-rayon"]
+
+[profile.dev]
+opt-level = 0
+debug = true
 
 [profile.release]
 lto = true

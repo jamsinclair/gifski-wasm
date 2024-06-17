@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Gif Creator</title>
+    <style>
+        #frames-preview {
+            display: flex;
+            overflow-x: auto;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        #frames-preview img {
+            max-width: 200px;
+            max-height: 200px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Choose image frames to turn into a gif</h1>
+    <form>
+        <input id="frames" type="file" accept="image/*" multiple>
+        <label for="quality">Quality:</label>
+        <input type="number" id="quality" name="quality" min="1" max="100" value="60">
+        <label for="fps">FPS (Frames Per Second):</label>
+        <input type="number" id="fps" name="fps" min="1" max="60" value="24">
+    </form>
+    <h2>Frames:</h2>
+    <div id="frames-preview">
+        <!-- Frames will be added here -->
+    </div>
+    <button id="start" type="button">Create Gif</button>
+    <h2>Generated Gif:</h2>
+    <div id="output">
+        <!-- Output GIF will be added here -->
+    </div>
+    <canvas style="position: absolute; opacity: 0; pointer-events: none;"></canvas>
+    <script src="main.js" type="module"></script>
+</body>
+</html>
