@@ -2,7 +2,7 @@
   "name": "simple-gif-creator",
   "scripts": {
     "dev": "vite dev",
-    "build": "vite build",
+    "build": "vite build && cp _headers dist",
     "preview": "vite preview"
   },
   "dependencies": {
