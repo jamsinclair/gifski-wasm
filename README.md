@@ -74,7 +74,7 @@ const gif = await encode({ frames, fps: 12, width: frameWidth, height: frameHeig
 
 By default, the encode function will use a single thread to encode the GIF, this is very slow. If you want to speed this up you can enable multithreading with the following.
 
-1. Import the encode method from 'gifski-wasm/multi-thread'
+1. Import the encode method from `gifski-wasm/multi-thread`
 1. Move your calls to `encode` into a [WebWorker](https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API/Using_web_workers).
 1. Configure your web server to use the following headers (this is [a security requirement](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/SharedArrayBuffer#security_requirements))
     - `Cross-Origin-Opener-Policy: same-origin`
