@@ -74,14 +74,10 @@ createGifButton.addEventListener('click', async (event) => {
 
     const worker = new Worker(new URL('./gif.worker.js', import.meta.url), { type: 'module' });
 
-    let quality = 50;
-    if (Number.isInteger(document.querySelector('#quality')?.value)) {
-        quality = Math.max(1, Math.min(100, document.querySelector('#quality')?.value));
-    }
-    let fps = 24;
-    if (Number.isInteger(document.querySelector('#fps')?.value)) {
-        fps = Math.max(1, Math.min(60, document.querySelector('#fps')?.value));
-    }
+    let quality = parseInt(document.querySelector('#quality')?.value, 10) || 60;
+    quality = Math.max(1, Math.min(100, quality));
+    let fps = parseInt(document.querySelector('#fps')?.value, 10) || 24;
+    fps = Math.max(1, Math.min(60, fps));
 
     worker.postMessage({ frames, fps, width: frameWidth, height: frameHeight, quality });
 
