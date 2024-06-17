@@ -8,6 +8,8 @@ Brings [gifski](https://github.com/ImageOptim/gifski) to the web.
 
 Powered by WebAssembly ⚡️.
 
+An example app that creates a gif from uploaded frames can be viewed at https://gifski-wasm.netlify.app.
+
 ## Installation
 
 ```shell

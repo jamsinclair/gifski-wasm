@@ -21,7 +21,7 @@ pub fn encode(frames: &[u8], num_of_frames: usize, width: u32, height: u32, fps:
     let settings = Settings {
         width: resize_width,
         height: resize_height,
-        quality: quality.unwrap_or(100),
+        quality: quality.unwrap_or(80),
         fast: false, // TODO: Do we want to expose this? Does it have much of an impact?
         repeat: if _repeat >= 0 { Repeat::Finite(_repeat as u16) } else { Repeat::Infinite },
     };
