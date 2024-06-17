@@ -10,7 +10,7 @@ wasm-opt = ["-O", "--no-validation"]
 crate-type = ["cdylib"]
 
 [dependencies]
-gifski-lite = { git = "https://github.com/jamsinclair/gifski-lite.git", branch = "rayon-test" }
+gifski-lite = { git = "https://github.com/jamsinclair/gifski-lite.git", branch = "main" }
 imgref = "1.9.1"
 rgb = "0.8.31"
 wasm-bindgen = "0.2.92"
@@ -23,6 +23,7 @@ parallel = ["gifski-lite/parallel", "wasm-bindgen-rayon"]
 
 [profile.dev]
 opt-level = 0
+debug = true
 
 [profile.release]
 lto = true
