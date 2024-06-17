@@ -1,0 +1,14 @@
+{
+  "name": "gifski-wasm",
+  "version": "1.0.1",
+  "files": [
+    "gifski_wasm_bg.wasm",
+    "gifski_wasm.js",
+    "gifski_wasm.d.ts"
+  ],
+  "module": "gifski_wasm.js",
+  "types": "gifski_wasm.d.ts",
+  "sideEffects": [
+    "./snippets/*"
+  ]
+}
