@@ -15,6 +15,7 @@
     "./multi-thread": "./dist/encode-multi-thread.js"
   },
   "files": [
+    "CHANGELOG.md",
     "dist/encode.js",
     "dist/encode.d.ts",
     "dist/encode-multi-thread.js",
