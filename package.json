@@ -1,6 +1,6 @@
 {
   "name": "gifski-wasm",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Encode GIF images to the max possible quality with JS!",
   "keywords": [
     "gif",

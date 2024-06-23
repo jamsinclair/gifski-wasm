@@ -11,14 +11,23 @@ export async function init (moduleOrPath?: InitInput){
   return gifskiModule;
 }
 
-function framesToBuffer (frames: Array<Uint8Array | ImageData>): Uint8Array {
-    return frames.reduce<Uint8Array>((acc, frame: Uint8Array | ImageData) => {
-        let _frame = frame instanceof ImageData || "data" in frame ? frame.data as Uint8ClampedArray : frame;
-        if (acc.length === 0) {
-            return new Uint8Array([..._frame]);
-        }
-        return new Uint8Array([...acc, ..._frame]);
-      }, new Uint8Array());
+function framesToBuffer(frames: Array<Uint8Array | ImageData>): Uint8Array {
+  // Pre-calculate the total length of all frames and instantiate a buffer of that size
+  // Faster than dynamically re-creating the buffer each time (previous approach)
+  const totalLength = frames.reduce((acc, frame) => {
+      const _frame = (frame instanceof ImageData || "data" in frame ? frame.data : frame) as Uint8Array;
+      return acc + _frame.length;
+  }, 0);
+  const framesBuffer = new Uint8Array(totalLength);
+
+  let offset = 0;
+  frames.forEach(frame => {
+      const _frame = (frame instanceof ImageData || "data" in frame ? frame.data : frame) as Uint8Array;
+      framesBuffer.set(_frame, offset);
+      offset += _frame.length;
+  });
+
+  return framesBuffer;
 }
 
 type EncodeOptions = {
