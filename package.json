@@ -1,6 +1,6 @@
 {
   "name": "gifski-wasm",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "Encode GIF images to the max possible quality with JS!",
   "keywords": [
     "gif",
@@ -38,14 +38,14 @@
   "author": "Jamie Sinclair <jamsinclairnz@gmail.com>",
   "license": "AGPL-3.0-or-later",
   "scripts": {
-    "clean": "rm -r dist pkg",
-    "build": "tsc"
+    "clean": "rm -rf dist tsconfig.tsbuildinfo",
+    "build": "npm run clean && tsc && rm -f pkg/.gitignore pkg-parallel/.gitignore"
   },
   "dependencies": {
     "wasm-feature-detect": "1.6.1"
   },
   "devDependencies": {
-    "typescript": "^4.5.5"
+    "typescript": "^5.5.2"
   },
   "type": "module"
 }
