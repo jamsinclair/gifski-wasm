@@ -102,3 +102,21 @@ import encode, { init } from 'gifski-wasm';
 await init(WASM_MODULE); 
 const gif = await encode(/* Make a gif */);
 ```
+
+## Known Issues
+
+### Issues with Vite and Vue build environments
+
+The wasm file may not be served or bundled by Vite correctly.
+
+To solve this update your `vite.config.js` file with the `optimizeDeps` property with the module name in the exclude array.
+
+```js
+import { defineConfig } from 'vite'
+
+export default defineConfig({
+  optimizeDeps: {
+    exclude: ["gifski-wasm"]
+  }
+})
+```
