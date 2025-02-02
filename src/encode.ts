@@ -48,7 +48,7 @@ type EncodeOptions = BaseEncodeOptions & {
   frameDurations: Array<number> | Uint32Array;
 }
 
-export default async function encode({
+export async function encode({
     frames,
     width,
     height,
@@ -85,3 +85,5 @@ export default async function encode({
 
   return buffer;
 }
+
+export default encode;
