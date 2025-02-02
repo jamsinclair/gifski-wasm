@@ -23,7 +23,11 @@ Note: You will need to either manually include the wasm files from the module di
 
 ### encode(options): Promise<ArrayBuffer>
 
-Encodes and animates the frames to the specified fps and resolves to an ArrayBuffer of the gif output.
+Encodes and animates the frames and resolves to an Uint8Array of the gif output.
+
+Either `fps` or `frameDurations` must be provided.
+- If `fps` is provided, all frames will be encoded with the same duration.
+- If `frameDurations` is provided, it must be an array of the same length as the frames array. Each value in the array will be the duration of the corresponding frame in milliseconds.
 
 #### options
 ```typescript
@@ -31,7 +35,8 @@ Encodes and animates the frames to the specified fps and resolves to an ArrayBuf
   frames: Array<Uint8Array | ImageData>; // An array of Image data or RBGA data to encode
   width: number; // The width of the frames
   height: number; // The height of the frames
-  fps: number; // The frames per second of the gif
+  fps?: number; // The frames per second of the gif
+  frameDurations?: number[]; // An array of frame durations in milliseconds
   quality?: number; // The quality of the gif, 1-100. Default 80
   repeat?: number;
   resizeWidth?: number;
