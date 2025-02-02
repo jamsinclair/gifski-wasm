@@ -1,6 +1,6 @@
 [package]
 name = "gifski-wasm"
-version = "1.0.1"
+version = "2.1.0"
 edition = "2021"
 
 [package.metadata.wasm-pack.profile.release]
