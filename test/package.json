@@ -1,0 +1,12 @@
+{
+  "name": "integration-tests",
+  "scripts": {
+    "test": "ava node.test.js"
+  },
+  "devDependencies": {
+    "ava": "^6.2.0",
+    "gifski-wasm": "file:.."
+  },
+  "private": true,
+  "type": "module"
+}
