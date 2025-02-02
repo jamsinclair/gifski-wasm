@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.1.1
+
+### Improvements
+
+- Additionally, expose the `encode` function as a named export.
+
 ## 2.1.0
 
 ### New Features
