@@ -23,10 +23,10 @@ Note: You will need to either manually include the wasm files from the module di
 
 ### encode(options): Promise<ArrayBuffer>
 
-Encodes and animates the frames and resolves to an Uint8Array of the gif output.
+Encodes and animates the frames and resolves to a Uint8Array of the gif output.
 
 Either `fps` or `frameDurations` must be provided.
-- If `fps` is provided, all frames will be encoded with the same duration.
+- If `fps` is provided, all frames will be equally spaced in time according to the frames per second.
 - If `frameDurations` is provided, it must be an array of the same length as the frames array. Each value in the array will be the duration of the corresponding frame in milliseconds.
 
 #### options
