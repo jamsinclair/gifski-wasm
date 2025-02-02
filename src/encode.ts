@@ -30,15 +30,22 @@ function framesToBuffer(frames: Array<Uint8Array | ImageData>): Uint8Array {
   return framesBuffer;
 }
 
-type EncodeOptions = {
+type BaseEncodeOptions = {
   frames: Array<Uint8Array | ImageData>;
   width: number;
   height: number;
-  fps: number;
   quality?: number;
   repeat?: number;
   resizeWidth?: number;
   resizeHeight?: number;
+}
+
+type EncodeOptions = BaseEncodeOptions & {
+  fps: number;
+  frameDurations?: never;
+} | BaseEncodeOptions & {
+  fps?: never;
+  frameDurations: Array<number> | Uint32Array;
 }
 
 export default async function encode({
@@ -46,17 +53,34 @@ export default async function encode({
     width,
     height,
     fps,
+    frameDurations,
     quality,
     repeat,
     resizeWidth,
     resizeHeight,
 }: EncodeOptions) {
+  if (frames.length === 1) {
+    throw new Error('At least 2 frames are required to encode a GIF with gifski');
+  }
+
+  if (!fps && !frameDurations) {
+    throw new Error('Either fps or frameDurations must be provided');
+  }
+
+  if (fps && frameDurations) {
+    throw new Error('fps and frameDurations cannot be provided at the same time');
+  }
+
+  if (frameDurations && frameDurations.length !== frames.length) {
+    throw new Error('The number of frame durations must match the number of frames');
+  }
+
   await init();
 
   const numOfFrames = frames.length;
   const framesBuffer = framesToBuffer(frames);
-
-  const buffer = await gifskiEncode(framesBuffer, numOfFrames, width, height, fps, quality, repeat, resizeWidth, resizeHeight);
+  const _frameDurations = frameDurations ? new Uint32Array(frameDurations) : undefined;
+  const buffer = await gifskiEncode(framesBuffer, numOfFrames, width, height, fps, _frameDurations, quality, repeat, resizeWidth, resizeHeight);
   if (!buffer) throw new Error('Encoding error.');
 
   return buffer;

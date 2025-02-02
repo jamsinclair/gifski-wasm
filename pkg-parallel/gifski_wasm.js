@@ -62,6 +62,22 @@ function isLikeNone(x) {
     return x === undefined || x === null;
 }
 
+let cachedUint32Memory0 = null;
+
+function getUint32Memory0() {
+    if (cachedUint32Memory0 === null || cachedUint32Memory0.buffer !== wasm.memory.buffer) {
+        cachedUint32Memory0 = new Uint32Array(wasm.memory.buffer);
+    }
+    return cachedUint32Memory0;
+}
+
+function passArray32ToWasm0(arg, malloc) {
+    const ptr = malloc(arg.length * 4, 4) >>> 0;
+    getUint32Memory0().set(arg, ptr / 4);
+    WASM_VECTOR_LEN = arg.length;
+    return ptr;
+}
+
 let cachedInt32Memory0 = null;
 
 function getInt32Memory0() {
@@ -80,24 +96,27 @@ function getArrayU8FromWasm0(ptr, len) {
 * @param {number} num_of_frames
 * @param {number} width
 * @param {number} height
-* @param {number} fps
+* @param {number | undefined} [fps]
+* @param {Uint32Array | undefined} [frame_durations]
 * @param {number | undefined} [quality]
 * @param {number | undefined} [repeat]
 * @param {number | undefined} [resize_width]
 * @param {number | undefined} [resize_height]
 * @returns {Uint8Array}
 */
-export function encode(frames, num_of_frames, width, height, fps, quality, repeat, resize_width, resize_height) {
+export function encode(frames, num_of_frames, width, height, fps, frame_durations, quality, repeat, resize_width, resize_height) {
     try {
         const retptr = wasm.__wbindgen_add_to_stack_pointer(-16);
         const ptr0 = passArray8ToWasm0(frames, wasm.__wbindgen_malloc);
         const len0 = WASM_VECTOR_LEN;
-        wasm.encode(retptr, ptr0, len0, num_of_frames, width, height, fps, isLikeNone(quality) ? 0xFFFFFF : quality, !isLikeNone(repeat), isLikeNone(repeat) ? 0 : repeat, !isLikeNone(resize_width), isLikeNone(resize_width) ? 0 : resize_width, !isLikeNone(resize_height), isLikeNone(resize_height) ? 0 : resize_height);
+        var ptr1 = isLikeNone(frame_durations) ? 0 : passArray32ToWasm0(frame_durations, wasm.__wbindgen_malloc);
+        var len1 = WASM_VECTOR_LEN;
+        wasm.encode(retptr, ptr0, len0, num_of_frames, width, height, isLikeNone(fps) ? 0xFFFFFF : fps, ptr1, len1, isLikeNone(quality) ? 0xFFFFFF : quality, !isLikeNone(repeat), isLikeNone(repeat) ? 0 : repeat, !isLikeNone(resize_width), isLikeNone(resize_width) ? 0 : resize_width, !isLikeNone(resize_height), isLikeNone(resize_height) ? 0 : resize_height);
         var r0 = getInt32Memory0()[retptr / 4 + 0];
         var r1 = getInt32Memory0()[retptr / 4 + 1];
-        var v2 = getArrayU8FromWasm0(r0, r1).slice();
+        var v3 = getArrayU8FromWasm0(r0, r1).slice();
         wasm.__wbindgen_free(r0, r1 * 1, 1);
-        return v2;
+        return v3;
     } finally {
         wasm.__wbindgen_add_to_stack_pointer(16);
     }
@@ -279,6 +298,7 @@ function __wbg_finalize_init(instance, module) {
     wasm = instance.exports;
     __wbg_init.__wbindgen_wasm_module = module;
     cachedInt32Memory0 = null;
+    cachedUint32Memory0 = null;
     cachedUint8Memory0 = null;
 
     wasm.__wbindgen_start();
