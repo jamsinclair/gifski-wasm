@@ -1,5 +1,13 @@
 # Changelog
 
+## 2.2.0
+
+### Improvements
+
+- Add `cloudflare` and `node` modules to make it easier to use in those environments. See the [README.md](./README.md) for more information.
+- Support `frames` type used in [jsquash/webp](https://github.com/jamsinclair/jsquash/tree/main/packages/webp) for animated webp images. Easier interoperability between the two libraries.
+- Drops the need for polyfilling ImageData. It anticipates an ImageData like object.
+
 ## 2.1.1
 
 ### Improvements

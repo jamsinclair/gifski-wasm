@@ -1,7 +1,7 @@
 {
   "name": "gifski-wasm",
   "type": "module",
-  "version": "3.0.0",
+  "version": "2.2.0",
   "files": [
     "gifski_wasm_bg.wasm",
     "gifski_wasm.js",

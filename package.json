@@ -1,6 +1,6 @@
 {
   "name": "gifski-wasm",
-  "version": "2.1.1",
+  "version": "2.2.0",
   "description": "Encode GIF images to the max possible quality with JS!",
   "keywords": [
     "gif",
@@ -18,10 +18,14 @@
   },
   "files": [
     "CHANGELOG.md",
+    "dist/cloudflare.js",
+    "dist/cloudflare.d.ts",
     "dist/encode.js",
     "dist/encode.d.ts",
     "dist/encode-multi-thread.js",
     "dist/encode-multi-thread.d.ts",
+    "dist/node.js",
+    "dist/node.d.ts",
     "pkg/gifski_wasm_bg.wasm",
     "pkg/gifski_wasm_bg.wasm.d.ts",
     "pkg/gifski_wasm.d.ts",
