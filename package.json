@@ -41,12 +41,14 @@
   "license": "AGPL-3.0-or-later",
   "scripts": {
     "clean": "rm -rf dist tsconfig.tsbuildinfo",
-    "build": "npm run clean && tsc && rm -f pkg/.gitignore pkg-parallel/.gitignore"
+    "build": "npm run clean && tsc && rm -f pkg/.gitignore pkg-parallel/.gitignore",
+    "format": "prettier --write ."
   },
   "dependencies": {
     "wasm-feature-detect": "1.6.1"
   },
   "devDependencies": {
+    "prettier": "^3.4.2",
     "typescript": "^5.5.2"
   },
   "type": "module"
