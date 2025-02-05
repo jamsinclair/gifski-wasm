@@ -1,6 +1,6 @@
 # gifski-wasm
 
-Brings [gifski](https://github.com/ImageOptim/gifski) to the web. 
+Brings [gifski](https://github.com/ImageOptim/gifski) to the web.
 
 > gifski converts video frames to GIF animations using pngquant's fancy features for efficient cross-frame palettes and temporal dithering. It produces animated GIFs that use thousands of colors per frame.
 
@@ -24,10 +24,12 @@ Note: You will need to either manually include the wasm files from the module di
 Encodes and animates the frames and resolves to a Uint8Array of the gif output.
 
 Either `fps` or `frameDurations` must be provided.
+
 - If `fps` is provided, all frames will be equally spaced in time according to the frames per second.
 - If `frameDurations` is provided, it must be an array of the same length as the frames array. Each value in the array will be the duration of the corresponding frame in milliseconds.
 
 #### options
+
 ```typescript
 {
   frames: Array<Uint8Array | ImageData>; // An array of Image data or RBGA data to encode
@@ -43,6 +45,7 @@ Either `fps` or `frameDurations` must be provided.
 ```
 
 #### Example
+
 ```js
 import encode from 'gifski-wasm';
 
@@ -50,27 +53,32 @@ const frames = [];
 const canvas = document.createElement('canvas');
 const ctx = canvas.getContext('2d');
 
-function getImageData (url) {
-    return new Promise(resolve => {
-        const img = new Image();
-        img.src = url;
-        img.onload = () => {
-            canvas.width = img.width;
-            canvas.height = img.height;
-            context.drawImage(img, 0, 0 );
-            resolve(ctx.getImageData(0, 0, img.width, img.height));
-        };
-    });
+function getImageData(url) {
+  return new Promise((resolve) => {
+    const img = new Image();
+    img.src = url;
+    img.onload = () => {
+      canvas.width = img.width;
+      canvas.height = img.height;
+      context.drawImage(img, 0, 0);
+      resolve(ctx.getImageData(0, 0, img.width, img.height));
+    };
+  });
 }
 
 for (let i = 0; i < 24; i++) {
-    frames.push(await getImageData(`/image-${i}.png`));
+  frames.push(await getImageData(`/image-${i}.png`));
 }
 
 // @note, you'll need to make sure your frames are the same height and width
 const frameWidth = frames[0].width;
 const frameHeight = frames[0].height;
-const gif = await encode({ frames, fps: 12, width: frameWidth, height: frameHeight });
+const gif = await encode({
+  frames,
+  fps: 12,
+  width: frameWidth,
+  height: frameHeight,
+});
 ```
 
 ## Faster Encoding with Web Workers
@@ -80,8 +88,8 @@ By default, the encode function will use a single thread to encode the GIF, this
 1. Import the encode method from `gifski-wasm/multi-thread`
 1. Move your calls to `encode` into a [WebWorker](https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API/Using_web_workers).
 1. Configure your web server to use the following headers (this is [a security requirement](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/SharedArrayBuffer#security_requirements))
-    - `Cross-Origin-Opener-Policy: same-origin`
-    - `Cross-Origin-Embedder-Policy: require-corp`
+   - `Cross-Origin-Opener-Policy: same-origin`
+   - `Cross-Origin-Embedder-Policy: require-corp`
 
 This will still only take effect in browsers that support multithreading. If the browser does not support it, it will fallback to single threaded mode.
 
@@ -97,9 +105,9 @@ It's now easy to get started with ESM Cloudflare Workers, you can use the provid
 import encode from 'gifski-wasm/cloudflare';
 
 const frames = [
-    [255,0,0,255],
-    [0,255,0,255],
-    [0,0,255,255],
+  [255, 0, 0, 255],
+  [0, 255, 0, 255],
+  [0, 0, 255, 255],
 ];
 
 const gif = await encode({ frames, width: 1, height: 1, fps: 1 });
@@ -113,9 +121,9 @@ If possible, running the native `gifski` via a child process is recommended. How
 import encode from 'gifski-wasm/node';
 
 const frames = [
-    [255,0,0,255],
-    [0,255,0,255],
-    [0,0,255,255],
+  [255, 0, 0, 255],
+  [0, 255, 0, 255],
+  [0, 0, 255, 255],
 ];
 
 const gif = await encode({ frames, width: 1, height: 1, fps: 1 });
@@ -134,7 +142,7 @@ The module exports an `init` function that can be used to manually load the wasm
 import encode, { init } from 'gifski-wasm';
 
 // The `WASM_MODULE` variable will need to be sourced by yourself and passed as an ArrayBuffer.
-await init(WASM_MODULE); 
+await init(WASM_MODULE);
 const gif = await encode(/* Make a gif */);
 ```
 
@@ -147,11 +155,11 @@ The wasm file may not be served or bundled by Vite correctly.
 To solve this update your `vite.config.js` file with the `optimizeDeps` property with the module name in the exclude array.
 
 ```js
-import { defineConfig } from 'vite'
+import { defineConfig } from 'vite';
 
 export default defineConfig({
   optimizeDeps: {
-    exclude: ["gifski-wasm"]
-  }
-})
+    exclude: ['gifski-wasm'],
+  },
+});
 ```

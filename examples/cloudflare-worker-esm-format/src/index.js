@@ -7,9 +7,9 @@ import encode from 'gifski-wasm/cloudflare';
  * - height: the height of the frames.
  * - quality: the quality of the gif.
  * - fps: the frames per second of the gif.
- * 
+ *
  * It will return the binary of the gif in the response body.
- * 
+ *
  * Example worker request:
  * curl -X POST "http://localhost:8787/" \
  * -H "Content-Type: application/json" \
@@ -31,7 +31,7 @@ async function handleRequest(request, _env, ctx) {
   }
 
   const payload = await request.json();
-  const frames = payload.frames.map(frame => new Uint8ClampedArray(frame));
+  const frames = payload.frames.map((frame) => new Uint8ClampedArray(frame));
 
   const gif = await encode({
     frames,
@@ -47,5 +47,5 @@ async function handleRequest(request, _env, ctx) {
 }
 
 export default {
-  fetch: handleRequest
-}
+  fetch: handleRequest,
+};

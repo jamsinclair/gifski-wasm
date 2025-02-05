@@ -11,6 +11,7 @@ We can use the latest Wrangler CLI to run the example locally and deploy it to C
 1. Run `npm install`
 2. Run `npm run start` to start the development server
 3. You can test the worker's gif encoding functionality by running the following command from your terminal. It should save the output gif to the current directory and flash red, green, and blue colors in a 4x4 grid.
+
 ```shell
 curl -X POST "http://localhost:8787/" \
 -H "Content-Type: application/json" \
@@ -35,9 +36,9 @@ Import `encode` from the `gifski-wasm/cloudflare` module and use it to encode th
 import encode from 'gifski-wasm/cloudflare';
 
 const frames = [
-    [255,0,0,255],
-    [0,255,0,255],
-    [0,0,255,255],
+  [255, 0, 0, 255],
+  [0, 255, 0, 255],
+  [0, 0, 255, 255],
 ];
 
 const gif = await encode({ frames, width: 1, height: 1, fps: 1 });

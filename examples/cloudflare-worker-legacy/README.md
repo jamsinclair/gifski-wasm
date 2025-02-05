@@ -11,6 +11,7 @@ We can use the latest Wrangler CLI to run the example locally and deploy it to C
 1. Run `npm install`
 2. Run `npm run start` to start the development server
 3. You can test the worker's gif encoding functionality by running the following command from your terminal. It should save the output gif to the current directory and flash red, green, and blue colors in a 4x4 grid.
+
 ```shell
 curl -X POST "http://localhost:8787/" \
 -H "Content-Type: application/json" \
@@ -27,12 +28,12 @@ curl -X POST "http://localhost:8787/" \
 }' -o output.gif
 ```
 
-
 ## Usage in Cloudflare Worker
 
 One caveat is wrangler won't dynamically bundle the WASM modules with the worker.
 
 You will need to ensure you configure the Worker to set these as global variables in the [wrangler.toml](wrangler.toml) file.
+
 ```
 # wrangler.toml
 [wasm_modules]
@@ -49,9 +50,9 @@ import encode, { init } from 'gifski-wasm';
 
 await init(GIFSKI_WASM); // The global variable of the wasm module needs to be defined in the wrangler.toml file
 const frames = [
-    [255,0,0,255],
-    [0,255,0,255],
-    [0,0,255,255],
+  [255, 0, 0, 255],
+  [0, 255, 0, 255],
+  [0, 0, 255, 255],
 ];
 
 const gif = await encode({ frames, width: 1, height: 1, fps: 1 });

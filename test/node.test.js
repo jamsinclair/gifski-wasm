@@ -1,6 +1,6 @@
-import { promises as fs } from "node:fs";
-import test from "ava";
-import encode from "gifski-wasm/node";
+import { promises as fs } from 'node:fs';
+import test from 'ava';
+import encode from 'gifski-wasm/node';
 
 function createFrame(width, height, r, g, b) {
   const frame = new Uint8ClampedArray(width * height * 4);
@@ -13,7 +13,7 @@ function createFrame(width, height, r, g, b) {
   return frame;
 }
 
-test("can successfully encode gif with specified fps", async (t) => {
+test('can successfully encode gif with specified fps', async (t) => {
   const frames = [
     createFrame(4, 4, 255, 0, 0),
     createFrame(4, 4, 0, 255, 0),
@@ -28,7 +28,7 @@ test("can successfully encode gif with specified fps", async (t) => {
   t.assert(data instanceof Uint8Array);
 });
 
-test("can successfully encode gif with specified frame durations", async (t) => {
+test('can successfully encode gif with specified frame durations', async (t) => {
   const frames = [
     createFrame(4, 4, 255, 0, 0),
     createFrame(4, 4, 0, 255, 0),
@@ -46,17 +46,21 @@ test("can successfully encode gif with specified frame durations", async (t) => 
   t.assert(data instanceof Uint8Array);
 });
 
-test("can successfully encode gif when durations specified in frames data", async (t) => {
-  const frames = [{
-    imageData: createFrame(4, 4, 255, 0, 0),
-    duration: 1000,
-  }, {
-    imageData: createFrame(4, 4, 0, 255, 0),
-    duration: 1000,
-  }, {
-    imageData: createFrame(4, 4, 0, 0, 255),
-    duration: 3000,
-  }];
+test('can successfully encode gif when durations specified in frames data', async (t) => {
+  const frames = [
+    {
+      imageData: createFrame(4, 4, 255, 0, 0),
+      duration: 1000,
+    },
+    {
+      imageData: createFrame(4, 4, 0, 255, 0),
+      duration: 1000,
+    },
+    {
+      imageData: createFrame(4, 4, 0, 0, 255),
+      duration: 3000,
+    },
+  ];
 
   const data = await encode({
     frames,
@@ -66,14 +70,14 @@ test("can successfully encode gif when durations specified in frames data", asyn
   t.assert(data instanceof Uint8Array);
 });
 
-test("throws error when neither frame durations and fps are provided", async (t) => {
+test('throws error when neither frame durations and fps are provided', async (t) => {
   const frames = [
     createFrame(4, 4, 255, 0, 0),
     createFrame(4, 4, 0, 255, 0),
     createFrame(4, 4, 0, 0, 255),
   ];
 
-  try  {
+  try {
     await encode({
       frames,
       width: 4,
@@ -85,7 +89,7 @@ test("throws error when neither frame durations and fps are provided", async (t)
   t.plan(1);
 });
 
-test("throws error when both frame durations and fps are provided", async (t) => {
+test('throws error when both frame durations and fps are provided', async (t) => {
   const frames = [
     createFrame(4, 4, 255, 0, 0),
     createFrame(4, 4, 0, 255, 0),
@@ -94,7 +98,7 @@ test("throws error when both frame durations and fps are provided", async (t) =>
 
   const frameDurations = [1000, 1000, 3000];
 
-  try  {
+  try {
     await encode({
       frames,
       width: 4,
@@ -108,15 +112,12 @@ test("throws error when both frame durations and fps are provided", async (t) =>
   t.plan(1);
 });
 
-test("throws error when frame durations length does not match frames length", async (t) => {
-  const frames = [
-    createFrame(4, 4, 255, 0, 0),
-    createFrame(4, 4, 0, 255, 0),
-  ];
+test('throws error when frame durations length does not match frames length', async (t) => {
+  const frames = [createFrame(4, 4, 255, 0, 0), createFrame(4, 4, 0, 255, 0)];
 
   const frameDurations = [1000];
 
-  try  {
+  try {
     await encode({
       frames,
       width: 4,
@@ -129,7 +130,7 @@ test("throws error when frame durations length does not match frames length", as
   t.plan(1);
 });
 
-test("throws error when frame durations are defined both in frames data and duration array", async (t) => {
+test('throws error when frame durations are defined both in frames data and duration array', async (t) => {
   const frames = [
     {
       imageData: createFrame(4, 4, 255, 0, 0),
@@ -138,12 +139,12 @@ test("throws error when frame durations are defined both in frames data and dura
     {
       imageData: createFrame(4, 4, 0, 255, 0),
       duration: 1000,
-    }
+    },
   ];
 
   const frameDurations = [1000, 1000];
 
-  try  {
+  try {
     await encode({
       frames,
       width: 4,
@@ -156,7 +157,7 @@ test("throws error when frame durations are defined both in frames data and dura
   t.plan(1);
 });
 
-test("throws error when frame durations are missing in frames", async (t) => {
+test('throws error when frame durations are missing in frames', async (t) => {
   const frames = [
     {
       imageData: createFrame(4, 4, 255, 0, 0),
@@ -164,10 +165,10 @@ test("throws error when frame durations are missing in frames", async (t) => {
     },
     {
       imageData: createFrame(4, 4, 0, 255, 0),
-    }
+    },
   ];
 
-  try  {
+  try {
     await encode({
       frames,
       width: 4,
@@ -179,7 +180,7 @@ test("throws error when frame durations are missing in frames", async (t) => {
   t.plan(1);
 });
 
-test("throws error when imageData is missing in frames", async (t) => {
+test('throws error when imageData is missing in frames', async (t) => {
   const frames = [
     {
       imageData: createFrame(4, 4, 255, 0, 0),
@@ -187,10 +188,10 @@ test("throws error when imageData is missing in frames", async (t) => {
     },
     {
       duration: 1000,
-    }
+    },
   ];
 
-  try  {
+  try {
     await encode({
       frames,
       width: 4,

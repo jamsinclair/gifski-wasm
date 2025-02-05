@@ -4,28 +4,25 @@ import { _internal_encode, EncodeOptions } from './encode';
 
 async function initMT(moduleOrPath?: InitInput) {
   const {
-      default: init,
-      initThreadPool,
-      encode
+    default: init,
+    initThreadPool,
+    encode,
   } = await import('../pkg-parallel/gifski_wasm.js');
   await init(moduleOrPath);
   await initThreadPool(globalThis.navigator.hardwareConcurrency);
   return { encode };
 }
-  
+
 async function initST(moduleOrPath?: InitInput) {
-  const {
-    default: init,
-    encode
-  } = await import('../pkg/gifski_wasm.js');
+  const { default: init, encode } = await import('../pkg/gifski_wasm.js');
   await init(moduleOrPath);
   return { encode };
 }
-  
+
 let wasmReady: ReturnType<typeof initMT | typeof initST>;
-  
+
 export async function init(
-  moduleOrPath?: InitInput,
+  moduleOrPath?: InitInput
 ): Promise<ReturnType<typeof initMT | typeof initST>> {
   if (!wasmReady) {
     const hasHardwareConcurrency =
