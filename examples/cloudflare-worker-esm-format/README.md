@@ -1,6 +1,6 @@
 # Cloudflare Worker Example (ES Module Format)
 
-For this example, we will be using the [Cloudflare Worker](https://workers.cloudflare.com/) platform to upgrade images to WebP.
+For this example, we will be using the [Cloudflare Worker](https://workers.cloudflare.com/) platform to make a simple worker that encodes a gif from a set of image frames.
 
 The example also uses the ES Module Format which is now the preferred way to use Cloudflare Workers.
 
@@ -29,19 +29,11 @@ curl -X POST "http://localhost:8787/" \
 
 ## Usage in Cloudflare Worker
 
-One caveat is wrangler won't dynamically bundle the WASM modules with the worker.
-
-You will need to "import" the correct WASM module manually. Behind the scenes, on deployment, the WASM modules are set as global variables.
-
-The module exports an `init` function that can be used to manually load the wasm module.
+Import `encode` from the `gifski-wasm/cloudflare` module and use it to encode the gif.
 
 ```js
-import encode, { init } from 'gifski-wasm';
+import encode from 'gifski-wasm/cloudflare';
 
-// Import the correct WASM module from the node_modules folder
-import GIFSKI_WASM from '../node_modules/gifski-wasm/pkg/gifski_wasm_bg.wasm';
-
-await init(GIFSKI_WASM); // GIFSKI_WASM is the name of the imported file
 const frames = [
     [255,0,0,255],
     [0,255,0,255],

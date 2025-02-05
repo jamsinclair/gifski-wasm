@@ -1,14 +1,5 @@
 import encode, { init } from 'gifski-wasm';
 
-// mock image data
-globalThis.ImageData = class ImageData {
-  constructor(data, width, height) {
-    this.data = data;
-    this.width = width;
-    this.height = height;
-  }
-}
-
 /**
  * This request handler expects a body containing:
  * - frames: an array of RGBA arrays representing each frame.
