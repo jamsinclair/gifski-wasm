@@ -1,7 +1,5 @@
 # gifski-wasm
 
-## ⚠️ This is an experimental package and is not recommended for production use.
-
 Brings [gifski](https://github.com/ImageOptim/gifski) to the web. 
 
 > gifski converts video frames to GIF animations using pngquant's fancy features for efficient cross-frame palettes and temporal dithering. It produces animated GIFs that use thousands of colors per frame.
@@ -89,14 +87,46 @@ This will still only take effect in browsers that support multithreading. If the
 
 [See the example project for a full example](/examples/simple-gif-creator/).
 
+## Other Runtimes
+
+### Cloudflare Workers
+
+It's now easy to get started with ESM Cloudflare Workers, you can use the provided `cloudflare` module. See the [Cloudflare Worker Example](/examples/cloudflare-worker-esm-format) for more information.
+
+```js
+import encode from 'gifski-wasm/cloudflare';
+
+const frames = [
+    [255,0,0,255],
+    [0,255,0,255],
+    [0,0,255,255],
+];
+
+const gif = await encode({ frames, width: 1, height: 1, fps: 1 });
+```
+
+### Node.js
+
+If possible, running the native `gifski` via a child process is recommended. However, if you need to run gifski in a Node.js environment, you can use the provided `node` module. It will run single-threaded, i.e. it won't be overly fast compared to the native `gifski` tool.
+
+```js
+import encode from 'gifski-wasm/node';
+
+const frames = [
+    [255,0,0,255],
+    [0,255,0,255],
+    [0,0,255,255],
+];
+
+const gif = await encode({ frames, width: 1, height: 1, fps: 1 });
+```
+
 ## Manual WASM initialisation (not recommended)
 
 In most situations there is no need to manually initialise the provided WebAssembly modules.
-The generated glue code takes care of this and supports most web bundlers.
+The generated glue code takes care of this and supports most web bundlers. We also provide special cloudflare and node.js modules that handle this for you.
 
-One exception is CloudFlare workers. The environment at this time (this could change in the future) does not allow code to be dynamically imported. It needs to be bundled at runtime. WASM modules are set as global variables or imported, depending on whether using classic or ESM cloudflare workers. See 
-- [Classic Cloudflare Worker Example](/examples/cloudflare-worker/README.md)
-- [ESM Cloudflare Worker Example](/examples/cloudflare-worker-esm-format/README.md)
+The only known exception is legacy service worker based Cloudflare Workers. See our [Legacy Cloudflare Worker Example](/examples/cloudflare-worker-legacy/README.md) on how to manually initialise the wasm module.
 
 The module exports an `init` function that can be used to manually load the wasm module.
 
