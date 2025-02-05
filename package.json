@@ -12,7 +12,9 @@
   ],
   "exports": {
     ".": "./dist/encode.js",
-    "./multi-thread": "./dist/encode-multi-thread.js"
+    "./multi-thread": "./dist/encode-multi-thread.js",
+    "./cloudflare": "./dist/cloudflare.js",
+    "./node": "./dist/node.js"
   },
   "files": [
     "CHANGELOG.md",
