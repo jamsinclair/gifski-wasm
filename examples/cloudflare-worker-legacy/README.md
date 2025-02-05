@@ -1,8 +1,8 @@
 # Cloudflare Worker Example (Service Worker Format)
 
-For this example, we will be using the [Cloudflare Worker](https://workers.cloudflare.com/) platform to upgrade images to WebP.
+For this example, we will be using the [Cloudflare Worker](https://workers.cloudflare.com/) platform to make a simple worker that encodes a gif from a set of image frames.
 
-The example uses the legacy "Service Worker Format" which is still supported by Cloudflare Workers.
+⚠️ The example uses the legacy "Service Worker Format" which is still supported by Cloudflare Workers. If possible, we recommend using the ES Module Format which provides a better developer experience. See the [ES Module Format example](/examples/cloudflare-worker-esm-format/README.md) to see the differences.
 
 We can use the latest Wrangler CLI to run the example locally and deploy it to Cloudflare Workers.
 

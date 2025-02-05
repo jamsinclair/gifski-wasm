@@ -9,6 +9,6 @@
     "gifski-wasm": "file:../../"
   },
   "devDependencies": {
-    "wrangler": "^3.1.0"
+    "wrangler": "^3.107.3"
   }
 }

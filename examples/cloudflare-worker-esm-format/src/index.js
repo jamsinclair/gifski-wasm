@@ -1,15 +1,4 @@
-import encode, { init } from 'gifski-wasm';
-
-import GIFSKI_WASM from '../node_modules/gifski-wasm/pkg/gifski_wasm_bg.wasm';
-
-// mock image data
-globalThis.ImageData = class ImageData {
-  constructor(data, width, height) {
-    this.data = data;
-    this.width = width;
-    this.height = height;
-  }
-}
+import encode from 'gifski-wasm/cloudflare';
 
 /**
  * This request handler expects a body containing:
@@ -44,7 +33,6 @@ async function handleRequest(request, _env, ctx) {
   const payload = await request.json();
   const frames = payload.frames.map(frame => new Uint8ClampedArray(frame));
 
-  await init(GIFSKI_WASM);
   const gif = await encode({
     frames,
     width: payload.width,
